@@ -1,0 +1,27 @@
+body {
+  background-image: linear-gradient(
+    to right top,
+    #6a98dc,
+    #00bdf9,
+    #00dddb,
+    #00f28a,
+    #cdf800
+  );
+  text-align: center;
+}
+
+.title {
+  height: 200px;
+  width: auto;
+}
+
+.pokeball {
+  height: fit-content;
+  width: 90%;
+  /* border: 1px solid black; */
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: auto;
+}
