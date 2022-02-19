@@ -65,6 +65,15 @@ body {
   margin: auto;
 }
 
+.pokeName:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.pokeIMG {
+  width: 500px;
+  height: 500px;
+}
 .myButton {
   box-shadow: 0px 10px 14px -7px #276873;
   background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
@@ -88,4 +97,11 @@ body {
 .myButton:active {
   position: relative;
   top: 1px;
+}
+
+@media only screen and (max-width: 600px) {
+  .pokeIMG {
+    height: 200px;
+    width: 200px;
+  }
 }
