@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Who's That Pokemon?</title>
+    <title>Pokedex API</title>
     <!-- CSS -->
     <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,8 +15,27 @@
     />
   </head>
   <body>
-    <img class="title" src="./assets/pokedex.png" alt="pokedex Title" />
-    <!--  -->
+    <section class="headContainer">
+      <h1 class="dex">Pokedex</h1>
+      <h3>
+        This Pokedex supports Pokemon from the Kanto region through the Galar
+        region.
+      </h3>
+      <p>Pokemon introduced in Legend's Arceus are not supported.</p>
+      <br />
+      <h1>Choose a region to get started!</h1>
+    </section>
+    <br />
+    <section class="regions">
+      <button class="myButton" id="kanto">Kanto</button>
+      <button class="myButton" id="johto">Johto</button>
+      <button class="myButton" id="hoenn">Hoenn</button>
+      <button class="myButton" id="sinnoh">Sinnoh</button>
+      <button class="myButton" id="unova">Unova</button>
+      <button class="myButton" id="kalos">Kalos</button>
+      <button class="myButton" id="alola">Alola</button>
+      <button class="myButton" id="galar">Galar</button>
+    </section>
 
     <div id="genPokemon">
       <!-- <button id="newPokemon">New Pokemon</button> -->

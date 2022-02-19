@@ -2,32 +2,28 @@ const baseURL = "https://pokeapi.co/api/v2/pokemon/";
 let newPokemon = document.getElementById("newPokemon");
 let pokemonContainer = document.getElementById("pokeball");
 
-let colors = {
-  fire: `#FDDFDD`,
-  grass: `#DEFDE0`,
-  electric: `#FCF7DE`,
-  water: `#DEF3FD`,
-  ground: `#f4e7da`,
-  rock: `#d5d5d4`,
-  fairy: `#fceaff`,
-  poison: `#98d7a5`,
-  bug: `#f8d5a3`,
-  dragon: `#97b3e6`,
-  psychic: `#eaeada1`,
-  flying: `#F5F5F5`,
-  fighting: `#E6E0D4`,
-  normal: `#F5F5F5`,
-};
+// Button fetches
+document.getElementById("kanto").addEventListener("click", fetchKanto);
+document.getElementById("johto").addEventListener("click", fetchJohto);
+document.getElementById("hoenn").addEventListener("click", fetchHoenn);
+document.getElementById("sinnoh").addEventListener("click", fetchSinnoh);
+document.getElementById("unova").addEventListener("click", fetchUnova);
+document.getElementById("kalos").addEventListener("click", fetchKalos);
+document.getElementById("alola").addEventListener("click", fetchAlola);
+document.getElementById("galar").addEventListener("click", fetchGalar);
 
-// covert URL to JSON so we can read it in the inspect tool
-// fetch(baseURL)
-//   .then((response) => response.json())
-//   .then((json) => console.log(json));
+async function fetchSearch() {
+  pokemonContainer.innerHTML = "";
+  {
+    const response = await fetch(`${baseURL}${searchText}`);
+    const json = await response.json();
+    displayPokemon(json);
+  }
+}
 
-// newPokemon.addEventListener("click", fetchPokemon);
-fetchPokemon();
-async function fetchPokemon() {
-  // For loops takes all pokemon in the array up to a specified number
+// Function to fetch Kanto Pokemon
+async function fetchKanto() {
+  pokemonContainer.innerHTML = "";
   for (let i = 1; i <= 151; i++) {
     const response = await fetch(`${baseURL}${i}`);
     const json = await response.json();
@@ -35,13 +31,88 @@ async function fetchPokemon() {
   }
 }
 
+// Function to fetch Johto Pokemon
+async function fetchJohto() {
+  pokemonContainer.innerHTML = "";
+  for (let i = 152; i <= 251; i++) {
+    const response = await fetch(`${baseURL}${i}`);
+    const json = await response.json();
+    displayPokemon(json);
+  }
+}
+
+// function to fetch Hoenn Pokemon
+async function fetchHoenn() {
+  pokemonContainer.innerHTML = "";
+  for (let i = 252; i <= 386; i++) {
+    const response = await fetch(`${baseURL}${i}`);
+    const json = await response.json();
+    displayPokemon(json);
+  }
+}
+
+// function to Sinnoh Pokemon
+async function fetchSinnoh() {
+  pokemonContainer.innerHTML = "";
+  for (let i = 387; i <= 493; i++) {
+    const response = await fetch(`${baseURL}${i}`);
+    const json = await response.json();
+    displayPokemon(json);
+  }
+}
+
+// function to fetch Unova Pokemon
+async function fetchUnova() {
+  pokemonContainer.innerHTML = "";
+  for (let i = 494; i <= 649; i++) {
+    const response = await fetch(`${baseURL}${i}`);
+    const json = await response.json();
+    displayPokemon(json);
+  }
+}
+
+// function to fetcg Kalos Pokemon
+async function fetchKalos() {
+  pokemonContainer.innerHTML = "";
+  for (let i = 650; i <= 721; i++) {
+    const response = await fetch(`${baseURL}${i}`);
+    const json = await response.json();
+    displayPokemon(json);
+  }
+}
+
+// function to fetch Alola Pokemon
+async function fetchAlola() {
+  pokemonContainer.innerHTML = "";
+  for (let i = 722; i <= 809; i++) {
+    const response = await fetch(`${baseURL}${i}`);
+    const json = await response.json();
+    displayPokemon(json);
+  }
+}
+
+// function to fetch Galar Pokemon
+async function fetchGalar() {
+  pokemonContainer.innerHTML = "";
+  for (let i = 810; i <= 898; i++) {
+    const response = await fetch(`${baseURL}${i}`);
+    const json = await response.json();
+    displayPokemon(json);
+  }
+}
+
 function displayPokemon(pokemon) {
+  console.log(pokemon);
+  let pokemonContainer = document.getElementById("pokeball");
+
   // Creates new elements to add to our HTML
   let pokeCard = document.createElement("div");
   let pokeIMG = document.createElement("img");
   let pokeID = document.createElement("p");
   let pokeName = document.createElement("h3");
   let pokeType = document.createElement("div");
+
+  // pokemonContainer != null ? pokemonContainer.removeChild() : null;
 
   // Capitilizes the name of the pokemon, would've been easier to just do it in CSS
   let capName = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
@@ -55,7 +126,7 @@ function displayPokemon(pokemon) {
   // Classes and styling for our new elements
   pokeCard.classname = "pokeCard";
   pokeCard.style =
-    "height: fit-content; width: 200px; background-color: rgba(255, 255, 255, 0.7); border-radius: 20%; margin: 1rem; padding: 1rem;-webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.2);";
+    "height: fit-content; width: 200px; background-color: rgba(255, 255, 255, 0.5); border-radius: 20%; margin: 1rem; padding: 1rem;-webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.2);";
   pokeIMG.classname = "pokeIMG";
   pokeIMG.style = "height: 150px; width: 150px;";
   pokeID.classname = "pokeID";
@@ -66,7 +137,11 @@ function displayPokemon(pokemon) {
   // pokeType.style = "text-transform: capitalize;";
 
   // pulls images from the API
-  pokeIMG.src = pokemon.sprites.other.dream_world.front_default;
+  if ((pokeIMG.src = pokemon.sprites.other.dream_world.front_default == null)) {
+    pokeIMG.src = pokemon.sprites.front_default;
+  } else {
+    pokeIMG.src = pokemon.sprites.other.dream_world.front_default;
+  }
 
   // Changes our Pokemon Number from 001 to #001
   pokeID.innerText = `
@@ -79,6 +154,7 @@ ${capName}
   `;
 
   // uses our previous function to display pokemon types
+  //! Not in use replaced with Pokemon Types on line 94, keep for testing
   // pokeType.innerText = `${types}`;
 
   // Append the Elements we created to the pokemonContainer
@@ -201,18 +277,25 @@ ${capName}
       "background-color: orange; color: black; width: 75px; border-radius: 15px; margin: auto;";
     pokeType.appendChild(fighting);
   }
+  if (types.includes("ghost")) {
+    let ghost = document.createElement("div");
+    ghost.innerHTML = "ghost";
+    ghost.style =
+      "background-color: black; color: pink; width: 75px; border-radius: 15px; margin: auto;";
+    pokeType.appendChild(ghost);
+  }
+  if (types.includes("steel")) {
+    let steel = document.createElement("div");
+    steel.innerHTML = "steel";
+    steel.style =
+      "background-color: lightgrey; color: black; width: 75px; border-radius: 15px; margin: auto;";
+    pokeType.appendChild(steel);
+  }
+  if (types.includes("dark")) {
+    let dark = document.createElement("div");
+    dark.innerHTML = "dark";
+    dark.style =
+      "background-color: black; color: white; width: 75px; border-radius: 15px; margin: auto;";
+    pokeType.appendChild(dark);
+  }
 }
-
-// if (types.includes("fire")) {
-//   pokeCard.style =
-//     "height: fit-content; width: 200px; background-color: #FDDFDD; border-radius: 20%; margin: 1rem; padding: 1rem;-webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.2);";
-// } else if (types.includes("grass")) {
-//   pokeCard.style =
-//     "height: fit-content; width: 200px; background-color: #DEFDE0; border-radius: 20%; margin: 1rem; padding: 1rem;-webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.2);";
-// } else if (types.includes("electric")) {
-//   pokeCard.style =
-//     "height: fit-content; width: 200px; background-color: #FCF7DE; border-radius: 20%; margin: 1rem; padding: 1rem;-webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.2);";
-// } else if (types.includes("water")) {
-//   pokeCard.style =
-//     "height: fit-content; width: 200px; background-color: rgba(222, 243, 253, 1); border-radius: 20%; margin: 1rem; padding: 1rem;-webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.2);";
-// }
